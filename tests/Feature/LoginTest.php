@@ -2,6 +2,7 @@
 
 use App\Filament\Pages\Auth\Login;
 use App\Models\User;
+use Database\Seeders\DatabaseSeeder;
 use function Pest\Livewire\livewire;
 
 it('has a login page', function () {
@@ -15,6 +16,7 @@ it('redirects to dashboard if your already logged in', function () {
 });
 
 it('contains login information if the page is visited in debug mode', function () {
+    $this->seed(DatabaseSeeder::class);
     config(['app.debug' => true]);
     $user = User::first();
 
@@ -29,6 +31,7 @@ it('contains login information if the page is visited in debug mode', function (
 });
 
 it('does not login information if the page is visited without debug mode', function () {
+    $this->seed(DatabaseSeeder::class);
     config(['app.debug' => false]);
 
     livewire(Login::class)
@@ -42,6 +45,7 @@ it('does not login information if the page is visited without debug mode', funct
 });
 
 it('Can succesfully login', function () {
+    $this->seed(DatabaseSeeder::class);
     $user = User::first();
     config(['app.debug' => true]);
 
